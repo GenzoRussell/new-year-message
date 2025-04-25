@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Plot Twist of the Year</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff7f50, #ff6347, #ff1493, #8a2be2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+            background-size: 400% 400%;
+            animation: gradientTransition 30s ease-in-out infinite; /* Increased duration and smoother easing */
+        }
+        
+        @keyframes gradientTransition {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .note-container {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: left;
+            width: 100%;
+            margin: 15px;
+            overflow-y: auto;
+            max-height: calc(100vh - 50px);
+            transition: all 0.3s ease;
+        }
+
+        .note-container h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: rgb(255, 115, 0);
+            text-align: left;
+        }
+
+        .note-container p {
+            font-size: 1rem;
+            line-height: 1.5;
+            text-align: left;
+            margin: 0;
+            display: none;
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+        }
+
+        .btn-show-message,
+        .btn-next-message {
+            padding: 10px 20px;
+            background-color: #ff6347;
+            color: white;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-show-message:hover,
+        .btn-next-message:hover {
+            background-color: #ff7f50;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            .note-container {
+                padding: 15px;
+                max-width: 90%;
+            }
+
+            .note-container h1 {
+                font-size: 1.6rem;
+            }
+
+            .note-container p {
+                font-size: 0.9rem;
+            }
+
+            .btn-show-message,
+            .btn-next-message {
+                font-size: 1rem;
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .note-container {
+                padding: 10px;
+                max-width: 90%;
+                box-shadow: none;
+            }
+
+            .note-container h1 {
+                font-size: 1.4rem;
+                margin-bottom: 5px;
+            }
+
+            .note-container p {
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+
+            .btn-show-message,
+            .btn-next-message {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio autoplay loop id="background-audio">
+        <source src="audio/pahinga.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="note-container">
+        <h1>Hello love</h1>
+        <button class="btn-show-message" id="show-button" onclick="showMessage()">Click mo here love hehe</button>
+
+        <p id="note-message-1" class="message">Hello my dearest love I hope this doesn’t catch you off guard, pero I’ve been wanting to tell you something that has been on my heart for a long time. Getting to know you over these past few days has been incredible and I cherish every moment we’ve shared, no matter how simple or short. The last time we've talk wasn’t that long ago, but it feels like meeting you has already made such a meaningful impact on my life. The reality is that my affection for you did not just come about the other day. I have been interested in you since 2021 and have been interested in you since that time.</p>
+        <p id="note-message-5" class="message">Back then I could only wish for the opportunity to be around you more often, and now that I have it, I am extremely thankful. It feels outrageous to call myself your admirer at this moment, but any other answer to that question would be an insult to family. You are indeed one of the person that I have come to love and regard. I perceive you as someone that I want to be adding value into your life and one that I will want to experience joy each and every day. I am not in a hurry because I know that I want things to come easy for you but I want you to understand how strong my intentions are towards you and considering how far we have come from 2021 to this day, it seems that the destiny has been looking for us and I am glad to see what is in store for us in 2025 and the year of 2024 already ended up and I want to say thank you for being my everything.</p>
+        <p id="note-message-9" class="message">You've made my life filled with happiness and love that will forever be cherished. I hope you know how grateful and lucky I am to have you. You bring so much light into my life because you're making me feel loved in any ways. Only God knows how much I appreciate your love for me. Remember, I am always here whenever you feel like you're at your lowest. You'll always have me as your biggest supporter and as someone who is always proud of you in everything you do. Thank you for being the color in my life. I love you, my pahinga.</p>
+
+        <button class="btn-next-message" id="next-button" onclick="showNextMessage()" style="display:none;">Next</button>
+    </div>
+
+    <script>
+        // Set the volume to 25%
+        document.getElementById('background-audio').volume = 0.;
+
+        let currentPage = 0;
+        const totalPages = 12;
+
+        function showMessage() {
+            // Hide the show button
+            document.getElementById('show-button').style.display = 'none';
+
+            // Show the first page of the message
+            document.getElementById(`note-message-${currentPage + 1}`).style.display = 'block';
+            document.getElementById('next-button').style.display = 'inline-block';
+        }
+
+        function showNextMessage() {
+            // Show the next paragraph of the message
+            if (currentPage < totalPages) {
+                currentPage++;
+                const currentMessage = document.getElementById(`note-message-${currentPage}`);
+                
+                // Expand the container and show the next message
+                currentMessage.style.display = 'block';
+                setTimeout(() => {
+                    currentMessage.style.opacity = 1;
+                }, 10);
+
+                // Scroll to the newly revealed message
+                currentMessage.scrollIntoView({ behavior: 'smooth' });
+
+                // Hide the next button when the last message is shown
+                if (currentPage === totalPages) {
+                    document.getElementById('next-button').style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
